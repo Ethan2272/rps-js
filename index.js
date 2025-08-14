@@ -58,4 +58,4 @@ function playGame() {
     console.log(gameResultMessage);
 }
 
-playGame();
+// playGame();
