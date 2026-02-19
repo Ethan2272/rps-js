@@ -1,5 +1,18 @@
 let computerScore = 0;
 let humanScore = 0;
+let gameInProgress = true;
+
+document.addEventListener('click', function(event) {
+    const targetElement = event.target;
+
+    if (!gameInProgress || targetElement.nodeName != 'BUTTON') {
+        return;
+    }
+
+    const humanChoice = targetElement.innerText;
+
+    startRound(humanChoice);
+});
 
 
 function getComputerChoice() {
@@ -39,23 +52,12 @@ function playRound(computerChoice, humanChoice) {
     console.log(roundResultMessage);
 }
 
-function playGame() {
-    for(let i = 0; i < 5; i++) {
-        let computerChoice = getComputerChoice();
-        let humanChoice = getHumanChoice();
-        playRound(computerChoice, humanChoice);
+// TODO: check score, update screen text as needed
+function startRound(humanChoice) {
+    if (!gameInProgress) {
+        return;
     }
 
-    let gameResultMessage;
-    if(computerScore > humanScore) {
-        gameResultMessage = 'The computer wins the game :(';
-    } else if (humanScore > computerScore) {
-        gameResultMessage = 'You win the game :)';
-    } else {
-        gameResultMessage = 'The game is a draw :|';
-    }
-
-    console.log(gameResultMessage);
+    const computerChoice = getComputerChoice();
+    playRound(computerChoice, humanChoice);
 }
-
-// playGame();
