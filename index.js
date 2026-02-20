@@ -1,6 +1,7 @@
 let computerScore = 0;
 let humanScore = 0;
 let gameInProgress = true;
+const headerMessage = document.getElementById('header-message');
 
 document.addEventListener('click', function(event) {
     const targetElement = event.target;
@@ -29,8 +30,7 @@ function getHumanChoice() {
 
 function playRound(computerChoice, humanChoice) {
     if (humanChoice == computerChoice) {
-        console.log(`This round is a draw! Both players picked ${computerChoice}`);
-        return;
+        return `This round is a draw! Both players picked ${computerChoice}`;
     }
     // Key choice beats value choice
     const winningConfigurations = {
@@ -49,7 +49,7 @@ function playRound(computerChoice, humanChoice) {
         humanScore++;
     }
 
-    console.log(roundResultMessage);
+    return roundResultMessage;
 }
 
 // TODO: check score, update screen text as needed
@@ -59,5 +59,7 @@ function startRound(humanChoice) {
     }
 
     const computerChoice = getComputerChoice();
-    playRound(computerChoice, humanChoice);
+    const roundMessage = playRound(computerChoice, humanChoice);
+
+    headerMessage.textContent = roundMessage; 
 }
