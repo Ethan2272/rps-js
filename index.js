@@ -2,6 +2,8 @@ let computerScore = 0;
 let humanScore = 0;
 let gameInProgress = true;
 const headerMessage = document.getElementById('header-message');
+const humanScoreboard = document.getElementById('player-scoreboard');
+const computerScoreboard = document.getElementById('computer-scoreboard');
 
 document.addEventListener('click', function(event) {
     const targetElement = event.target;
@@ -10,7 +12,7 @@ document.addEventListener('click', function(event) {
         return;
     }
 
-    const humanChoice = targetElement.innerText;
+    const humanChoice = targetElement.innerText.toLowerCase();
 
     startRound(humanChoice);
 });
@@ -60,6 +62,9 @@ function startRound(humanChoice) {
 
     const computerChoice = getComputerChoice();
     const roundMessage = playRound(computerChoice, humanChoice);
+
+    humanScoreboard.innerText = humanScore;
+    computerScoreboard.innerText = computerScore;
 
     headerMessage.textContent = roundMessage; 
 }
