@@ -9,6 +9,7 @@ document.addEventListener('click', function(event) {
     const targetElement = event.target;
 
     if (!gameInProgress || targetElement.nodeName != 'BUTTON') {
+        alert("Game is over");
         return;
     }
 
@@ -44,10 +45,10 @@ function playRound(computerChoice, humanChoice) {
     let computerWins = (winningConfigurations[computerChoice] == humanChoice);
     let roundResultMessage;
     if(computerWins) {
-        roundResultMessage = `You lose this round! ${computerChoice} beats ${humanChoice}`;
+        roundResultMessage = `You lose this round! ${computerChoice} beats ${humanChoice}.`;
         computerScore++;
     } else {
-        roundResultMessage = `You win this round! ${humanChoice} beats ${computerChoice}`;
+        roundResultMessage = `You win this round! ${humanChoice} beats ${computerChoice}.`;
         humanScore++;
     }
 
@@ -66,5 +67,10 @@ function startRound(humanChoice) {
     humanScoreboard.innerText = humanScore;
     computerScoreboard.innerText = computerScore;
 
-    headerMessage.textContent = roundMessage; 
+    headerMessage.textContent = roundMessage;
+
+    if(computerScore >= 5 || humanScore >= 5) {
+        headerMessage.textContent += " Game over!";
+        gameInProgress = false;
+    }
 }
